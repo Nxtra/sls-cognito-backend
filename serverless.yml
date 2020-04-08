@@ -3,7 +3,6 @@ service: sls-cognito-backend
 provider:
   name: aws
   runtime: nodejs12.x
-  profile: student1
 
 functions:
   hello:
@@ -22,6 +21,10 @@ resources:
       Type: AWS::Cognito::UserPool
       Properties:
         UserPoolName: cognito_sls_backend_user_pool
+        AutoVerifiedAttributes:
+          - email
+        EmailConfiguration:
+          EmailSendingAccount: COGNITO_DEFAULT
     # Cognito - Client
     CognitoUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
